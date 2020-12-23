@@ -34,8 +34,8 @@ ENV PATH=${PATH}:${HADOOP_HOME}/sbin:${HADOOP_HOME}/bin:${HIVE_HOME}/bin
 USER aaraj
 
 #prepare hadoop master
-RUN hadoop namenode -format; \
-    hadoop-daemon.sh start datanode; \
+RUN echo 'Y' | hadoop namenode -format; \
+    #hadoop-daemon.sh start datanode; \
     hadoop-daemon.sh start namenode; \
     yarn-daemon.sh start resourcemanager; \
     yarn-daemon.sh start nodemanager; \
@@ -47,7 +47,7 @@ RUN hadoop namenode -format; \
     hadoop fs -mkdir -p /user/spark; \
     hadoop fs -mkdir -p /user/spark/applicationHistory; \
     hadoop fs -chmod 1777 /user/spark/applicationHistory;
-
+    #echo 'Y' | hdfs namenode -format; \
 
 USER root
 
