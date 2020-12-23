@@ -1,0 +1,108 @@
+version: "3"
+services:
+
+
+
+  mysql:
+    image: com.pranee.docker/mysql:latest
+    hostname: mysql
+    ports:
+      - "3306:3306"    
+    container_name: mysql
+
+  #hadoop-master:
+  #  image: com.pranee.docker/hadoop-master:latest
+  #  hostname: hadoop-master
+  #  ports:
+  #    - "50070:50070"
+  #    - "50470:50470"
+  #    - "50090:50090"
+  #    - "9000:9000"
+  #    - "50030:50030"
+  #    - "8021:8021"
+  #    - "51111:51111"
+  #    - "10000:10000"
+  #    - "9083:9083"
+  #    - "50111:50111"
+  #    - "8088:8088"
+  #    - "8090:8090"
+  #    - "8050:8050"
+  #    - "8025:8025"
+  #    - "8030:8030"
+  #    - "8141:8141"
+  #    - "8042:8042"
+  #    - "10200:10200"
+  #    - "19888:19888"
+  #  environment:
+  #    HIVE_DEBUGLOG: "true"
+  #  container_name: hadoop-master
+
+  #hadoop-worker:
+  #  image: com.pranee.docker/hadoop-worker:latest
+  #  hostname: hadoop-worker
+  #  ports:
+  #    - "50075:50075"
+  #    - "50475:50475"
+  #    - "50010:50010"
+  #    - "50020:50020"
+  #    - "50060:50060"
+  #    - "45454:45454"
+  #  #environment:
+  #      #HIVE_DEBUGLOG: "true"
+  #  container_name: hadoop-worker
+
+  hadoop-cluster:
+    image: com.pranee.docker/hadoop-cluster:latest
+    hostname: hadoop-cluster
+    ports:
+      - "21050:21050"
+      - "50070:50070"
+      - "50075:50075"
+      - "18081:18081"
+      - "18080:18080"
+      - "10000:10000"
+      - "50010:50010"
+      - "8032:8032"
+      - "8088:8088"
+      - "9000:9000"
+      - "8042:8042"
+      - "2222:2222"
+    environment:
+      HIVE_DEBUGLOG: "true"
+    container_name: hadoop-cluster
+
+
+  #spark:
+  #  image: com.pranee.docker/spark:latest
+  #  hostname: spark-driver
+  #  ports:
+  #    - "4040:4040"
+  #  container_name: spark-driver
+
+  zk:
+    image: wurstmeister/zookeeper
+    hostname: zk
+    ports:
+      - "2181:2181"
+    container_name: zk
+  
+  #kafka:
+  #  image: wurstmeister/kafka:2.12-2.2.1
+  #  hostname: kafka
+  #  ports:
+  #    - "9092:9092"
+  #    - "19092:19092"
+  #  environment:
+  #    KAFKA_LISTENERS: INSIDE://kafka:19092,CLIENT://kafka:9092
+  #    KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:19092,CLIENT://localhost:9092
+  #    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CLIENT:PLAINTEXT,INSIDE:PLAINTEXT
+  #    KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+  #    KAFKA_CREATE_TOPICS: test:1:1,pizza_logger:1:1
+  #    KAFKA_ZOOKEEPER_CONNECT: zk:2181
+  #    KAFKA_BROKER_ID: 999
+  #  container_name: kafka
+
+networks:
+   default:
+      external:
+        name: pranee

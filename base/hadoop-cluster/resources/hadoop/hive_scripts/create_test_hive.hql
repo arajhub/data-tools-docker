@@ -1,0 +1,1 @@
+#sample hive boot up create table script
